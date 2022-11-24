@@ -1,5 +1,7 @@
 package com.example.cryptodata;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -23,6 +25,12 @@ public class APIUtility {
         HttpClient httpClient = HttpClient.newHttpClient();
         HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(uri)).build();
 
-        HttpResponse<Path> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofFile(Paths.get("coins.json")));
+        HttpResponse<String> httpResponse = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
+
+        Gson gson = new Gson();
+        APIResponse apiResponse = gson.fromJson(httpResponse.body(),APIResponse.class);
+
+        System.out.println(apiResponse);
+
     }
 }
