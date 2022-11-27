@@ -9,6 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class APIUtility {
     /**
@@ -18,7 +19,7 @@ public class APIUtility {
      * @throws IOException
      * @throws InterruptedException
      */
-    public static void getCoinsFromAPI(String searchText,String orderBy) throws IOException, InterruptedException {
+    public static APIResponse getCoinsFromAPI(String searchText, String orderBy) throws IOException, InterruptedException {
         searchText = searchText.replaceAll(" ","%20");
         String uri = "https://coinranking1.p.rapidapi.com/coins/?rapidapi-key=2cdf14a81emshb4221322bfabc0ap110dccjsn16362add46d0&orderBy="+ orderBy + "&search=" + searchText;
 
@@ -30,7 +31,6 @@ public class APIUtility {
         Gson gson = new Gson();
         APIResponse apiResponse = gson.fromJson(httpResponse.body(),APIResponse.class);
 
-        System.out.println(apiResponse);
-
+        return apiResponse;
     }
 }
