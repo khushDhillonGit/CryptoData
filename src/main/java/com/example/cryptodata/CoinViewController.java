@@ -34,11 +34,16 @@ public class CoinViewController implements Initializable {
     @FXML
     private Label errorLabel;
 
+    @FXML
+    private Label countLabel;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         orderByCombo.getItems().addAll("price", "marketCap", "24hVolume", "change", "listedAt");
         orderByCombo.getSelectionModel().selectFirst();
         imageView.setImage(new Image(Main.class.getResourceAsStream("images/default-coin.jpg")));
+
+        countLabel.setText("Total Coins: 0");
         errorLabel.setText("Crypto is Love!");
         errorLabel.setTextFill(Color.color(1,0,0));
 
@@ -74,10 +79,10 @@ public class CoinViewController implements Initializable {
             APIResponse apiResponse = APIUtility.getCoinsFromAPI(searchText, orderByCombo.getValue());
             if(apiResponse.getStatus() && apiResponse.validData()){
                 dataList.getItems().addAll(apiResponse.getData().getCoins());
+                countLabel.setText("Total Coins: " + apiResponse.getData().getCoins().length);
             }else{
                 errorLabel.setText("Coin not Available! Please check the coin name or symbol");
             }
-
         }else{
             errorLabel.setText("Please enter a search value");
         }
