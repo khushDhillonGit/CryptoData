@@ -88,5 +88,10 @@ public class CoinViewController implements Initializable {
         }
     }
 
+    @FXML
+    void changeSceneToDetails(ActionEvent event) throws IOException {
+        SceneChange.changeScene(event,"coin-detail-view.fxml");
+    }
+
 
 }
