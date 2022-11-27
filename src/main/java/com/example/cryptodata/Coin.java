@@ -1,5 +1,9 @@
 package com.example.cryptodata;
 
+import javafx.util.converter.CurrencyStringConverter;
+
+import java.util.Locale;
+
 public class Coin {
     private String symbol;
     private String name;
@@ -38,6 +42,14 @@ public class Coin {
     }
 
     public String toString(){
-        return getName() + " (" + getSymbol() + ")" + " - " + getPrice();
+        if(getPrice() != null){
+            CurrencyStringConverter csv = new CurrencyStringConverter(Locale.CANADA);
+            float price =  Float.valueOf(getPrice());
+            return getName() + " (" + getSymbol() + ")" + " - " + csv.toString(price);
+        }else{
+            return getName() + " (" + getSymbol() + ")" + "- [No Price Available]";
+        }
+
     }
+
 }
