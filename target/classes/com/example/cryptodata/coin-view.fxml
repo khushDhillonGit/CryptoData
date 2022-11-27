@@ -53,6 +53,11 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </GridPane>
+            <StackPane prefHeight="34.0" prefWidth="800.0">
+               <children>
+                  <Label fx:id="errorLabel" text="Label" />
+               </children>
+            </StackPane>
             <HBox prefHeight="422.0" prefWidth="800.0">
                <children>
                   <ListView fx:id="dataList" prefHeight="388.0" prefWidth="682.0" />
