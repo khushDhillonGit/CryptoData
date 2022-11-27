@@ -26,11 +26,23 @@ public class Coin {
     }
 
     public String getMarketCap() {
-        return marketCap;
+        if(marketCap != null){
+            CurrencyStringConverter csv = new CurrencyStringConverter(Locale.CANADA);
+            float marketCapF =  Float.valueOf(marketCap);
+            return csv.toString(marketCapF);
+        }else{
+            return "[No Data Available]";
+        }
     }
 
     public String getPrice() {
-        return price;
+        if(price != null){
+            CurrencyStringConverter csv = new CurrencyStringConverter(Locale.CANADA);
+            float priceF =  Float.valueOf(price);
+            return csv.toString(priceF);
+        }else{
+            return "[No Price Available]";
+        }
     }
 
     public int getRank() {
@@ -38,18 +50,11 @@ public class Coin {
     }
 
     public String getChange() {
-        return change;
+        return change + "%";
     }
 
     public String toString(){
-        if(getPrice() != null){
-            CurrencyStringConverter csv = new CurrencyStringConverter(Locale.CANADA);
-            float price =  Float.valueOf(getPrice());
-            return getName() + " (" + getSymbol() + ")" + " - " + csv.toString(price);
-        }else{
-            return getName() + " (" + getSymbol() + ")" + "- [No Price Available]";
-        }
-
+        return getName() + " (" + getSymbol() + ")" + " - " + getPrice();
     }
 
 }
