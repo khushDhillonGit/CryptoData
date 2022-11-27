@@ -43,7 +43,6 @@ public class CoinViewController implements Initializable {
         errorLabel.setTextFill(Color.color(1,0,0));
 
         dataList.getSelectionModel().selectedItemProperty().addListener((obs,old,coinSelected)->{
-
             if(coinSelected != null){
                 String iconUrl = coinSelected.getIconUrl();
                 try{
@@ -57,13 +56,17 @@ public class CoinViewController implements Initializable {
     }
 
     @FXML
-    void getCoins(ActionEvent event) throws IOException, InterruptedException {
+    void getCoins() throws IOException, InterruptedException {
         dataList.getItems().clear();
         String searchText = searchField.getText();
         if(!searchText.isBlank()) {
             errorLabel.setText("Crypto is Love!");
             APIResponse apiResponse = APIUtility.getCoinsFromAPI(searchText, orderByCombo.getValue());
-            dataList.getItems().addAll(apiResponse.getData().getCoins());
+            if(apiResponse.getStatus() && apiResponse.validData()){
+                dataList.getItems().addAll(apiResponse.getData().getCoins());
+            }else{
+                errorLabel.setText("Coin not Available! Please check the coin name or symbol");
+            }
 
         }else{
             errorLabel.setText("Please enter a search value");

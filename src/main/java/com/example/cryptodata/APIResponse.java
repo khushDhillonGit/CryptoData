@@ -4,10 +4,12 @@ public class APIResponse {
     private String status;
     private Data data;
 
-    public String getStatus() {
-        return status;
+    public boolean getStatus() {
+        return status.equalsIgnoreCase("success");
     }
-
+    public boolean validData(){
+        return data.getCoins().length > 0;
+    }
     public Data getData() {
         return data;
     }
