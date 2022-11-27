@@ -36,4 +36,8 @@ public class Coin {
     public String getChange() {
         return change;
     }
+
+    public String toString(){
+        return getName() + " (" + getSymbol() + ")" + " - " + getPrice();
+    }
 }
