@@ -15,7 +15,7 @@ public class SceneChange {
             Scene scene = new Scene(fxmlLoader.load());
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setTitle("Coin Details");
+            stage.setTitle("Search Coin!");
             stage.setScene(scene);
             stage.show();
         }
