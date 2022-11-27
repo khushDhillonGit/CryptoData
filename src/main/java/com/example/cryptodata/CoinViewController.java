@@ -53,6 +53,16 @@ public class CoinViewController implements Initializable {
                 }
             }
         });
+
+        orderByCombo.getSelectionModel().selectedItemProperty().addListener((obs,old,selected)->{
+            try {
+                getCoins();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @FXML
