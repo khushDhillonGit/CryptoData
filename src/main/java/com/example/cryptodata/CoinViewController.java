@@ -1,11 +1,16 @@
 package com.example.cryptodata;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,12 +27,28 @@ public class CoinViewController implements Initializable {
     @FXML
     private TextField searchField;
 
+    @FXML
+    private ImageView imageView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         orderByCombo.getItems().addAll("price", "marketCap", "24hVolume", "change", "listedAt");
         orderByCombo.getSelectionModel().selectFirst();
+        imageView.setImage(new Image(Main.class.getResourceAsStream("images/default-coin.jpg")));
 
+
+        dataList.getSelectionModel().selectedItemProperty().addListener((obs,old,coinSelected)->{
+
+            if(coinSelected != null){
+                String iconUrl = coinSelected.getIconUrl();
+                try{
+                    iconUrl = iconUrl.replace(".svg",".png");
+                    imageView.setImage(new Image(iconUrl));
+                }catch (IllegalArgumentException e){
+                    imageView.setImage(new Image(Main.class.getResourceAsStream("images/default-coin.jpg")));
+                }
+            }
+        });
     }
 
     @FXML
@@ -36,7 +57,6 @@ public class CoinViewController implements Initializable {
         String searchText = searchField.getText();
         APIResponse apiResponse = APIUtility.getCoinsFromAPI(searchText,orderByCombo.getValue());
         dataList.getItems().addAll(apiResponse.getData().getCoins());
-
     }
 
 }
