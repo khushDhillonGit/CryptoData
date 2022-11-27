@@ -3,7 +3,9 @@ package com.example.cryptodata;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -90,7 +92,12 @@ public class CoinViewController implements Initializable {
 
     @FXML
     void changeSceneToDetails(ActionEvent event) throws IOException {
-        SceneChange.changeScene(event,"coin-detail-view.fxml");
+        if(dataList.getSelectionModel().getSelectedItem()!=null){
+            SceneChange.changeSceneToCoinViewDetail(event,"coin-detail-view.fxml",dataList.getSelectionModel().getSelectedItem());
+        }else{
+            errorLabel.setText("Please select a coin from the list");
+        }
+
     }
 
 
