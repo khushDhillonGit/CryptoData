@@ -24,7 +24,6 @@ public class SceneChange {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxmlFileName));
         Scene scene = new Scene(fxmlLoader.load());
 
-
         CoinDetailViewController controller = fxmlLoader.getController();
         controller.putData(coin);
 

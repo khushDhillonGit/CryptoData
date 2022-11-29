@@ -49,7 +49,7 @@ public class CoinViewController implements Initializable {
 
         countLabel.setText("Total Coins: 0");
         errorLabel.setText("Crypto is Love!");
-        errorLabel.setTextFill(Color.color(1,0,0));
+        errorLabel.setTextFill(Color.color(0.25,0.25,1));
 
         dataList.getSelectionModel().selectedItemProperty().addListener((obs,old,coinSelected)->{
             if(coinSelected != null){

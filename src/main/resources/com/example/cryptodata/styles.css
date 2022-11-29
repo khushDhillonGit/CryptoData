@@ -1,0 +1,28 @@
+.root{
+    -fx-font-size: 12pt;
+    -fx-font-family: "Yu Gothic Medium";
+}
+#orderByCombo{
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, #f1d3b7;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 6pt, 6pt, 4pt, 2pt;
+}
+#getButton{
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, #2d522b;
+    -fx-text-fill: white;
+    -fx-background-radius: 6pt, 6pt, 4pt, 2pt;
+}
+#detailsButton{
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, #e08e8e;
+    -fx-text-fill: white;
+    -fx-background-radius: 6pt, 6pt, 4pt, 2pt;
+}
+#topLabel{
+    -fx-font-style: bold;
+    -fx-text-fill: #0a2c50;
+}
+#backButton{
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, #2d522b;
+    -fx-text-fill: white;
+    -fx-background-radius: 6pt, 6pt, 4pt, 2pt;
+}

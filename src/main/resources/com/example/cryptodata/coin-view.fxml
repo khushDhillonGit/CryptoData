@@ -17,13 +17,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cryptodata.CoinViewController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cryptodata.CoinViewController">
    <children>
       <VBox layoutX="213.0" layoutY="100.0" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <StackPane prefHeight="103.0" prefWidth="800.0">
                <children>
-                  <Label text="Search Your Favorite Crypto Currency">
+                  <Label fx:id="topLabel" text="Search Your Favorite Crypto Currency">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -41,11 +41,11 @@
               </rowConstraints>
                <children>
                   <ChoiceBox fx:id="orderByCombo" prefHeight="26.0" prefWidth="149.0" GridPane.columnIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#getCoins" prefHeight="26.0" prefWidth="104.0" text="Get Coins!" GridPane.columnIndex="2" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <Button fx:id="getButton" mnemonicParsing="false" onAction="#getCoins" prefHeight="26.0" prefWidth="104.0" text="Get Coins!" GridPane.columnIndex="2" />
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="76.0" text="Searrch Coin:" />
-                        <TextField fx:id="searchField" prefHeight="26.0" prefWidth="170.0" promptText="Enter Name or Symbol" />
+                        <Label prefHeight="26.0" prefWidth="98.0" text="Search Coin:" />
+                        <TextField fx:id="searchField" prefHeight="37.0" prefWidth="142.0" promptText="Enter Name or Symbol" />
                      </children>
                   </HBox>
                </children>
@@ -75,7 +75,7 @@
                         </ImageView>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#changeSceneToDetails" text="Details" />
+                              <Button fx:id="detailsButton" mnemonicParsing="false" onAction="#changeSceneToDetails" text="Details" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
