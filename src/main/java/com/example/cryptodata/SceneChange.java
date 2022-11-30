@@ -10,9 +10,12 @@ import java.io.IOException;
 
 public class SceneChange {
 
-        public static void changeSceneToCoinView(ActionEvent event, String fxmlFileName) throws IOException {
+        public static void changeSceneToCoinView(ActionEvent event, String fxmlFileName) throws IOException, InterruptedException {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxmlFileName));
             Scene scene = new Scene(fxmlLoader.load());
+
+            CoinViewController controller = fxmlLoader.getController();
+            controller.retainCoins();
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setTitle("Search Coin!");

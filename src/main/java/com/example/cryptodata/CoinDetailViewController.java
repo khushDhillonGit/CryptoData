@@ -39,7 +39,7 @@ public class CoinDetailViewController {
 
 
     @FXML
-    void changeSceneToDetails(ActionEvent event) throws IOException {
+    void changeSceneToDetails(ActionEvent event) throws IOException, InterruptedException {
         SceneChange.changeSceneToCoinView(event,"coin-view.fxml");
     }
 

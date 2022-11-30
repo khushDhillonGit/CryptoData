@@ -2,18 +2,16 @@ package com.example.cryptodata;
 
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
+
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 
@@ -41,6 +39,11 @@ public class CoinViewController implements Initializable {
     @FXML
     private Label countLabel;
 
+    //variables to store values when scene is changed
+    private static String search;
+    private static String orderBy;
+    private static Coin selectedCoin;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         orderByCombo.getItems().addAll("price", "marketCap", "24hVolume", "change", "listedAt");
@@ -54,6 +57,7 @@ public class CoinViewController implements Initializable {
         dataList.getSelectionModel().selectedItemProperty().addListener((obs,old,coinSelected)->{
             if(coinSelected != null){
                 String iconUrl = coinSelected.getIconUrl();
+                selectedCoin = coinSelected;
                 try{
                     iconUrl = iconUrl.replace(".svg",".png");
                     imageView.setImage(new Image(iconUrl));
@@ -88,11 +92,31 @@ public class CoinViewController implements Initializable {
         dataList.getItems().clear();
         String searchText = searchField.getText();
         if(!searchText.isBlank()) {
+            search = searchText;
+            orderBy = orderByCombo.getValue();
             errorLabel.setText("Crypto is Love!");
             APIResponse apiResponse = APIUtility.getCoinsFromAPI(searchText, orderByCombo.getValue());
             if(apiResponse.getStatus() && apiResponse.validData()){
                 dataList.getItems().addAll(apiResponse.getData().getCoins());
                 countLabel.setText("Total Coins: " + apiResponse.getData().getCoins().length);
+            }else{
+                errorLabel.setText("Coin not Available! Please check the coin name or symbol");
+            }
+        }else{
+            errorLabel.setText("Please enter a search value");
+        }
+    }
+
+
+    void retainCoins() throws IOException, InterruptedException {
+        if(!search.isBlank()) {
+            searchField.setText(search);
+            orderByCombo.setValue(orderBy);
+            APIResponse apiResponse = APIUtility.getCoinsFromAPI(search, orderBy);
+            if(apiResponse.getStatus() && apiResponse.validData()){
+                dataList.getItems().addAll(apiResponse.getData().getCoins());
+                countLabel.setText("Total Coins: " + apiResponse.getData().getCoins().length);
+                dataList.getSelectionModel().select(selectedCoin);
             }else{
                 errorLabel.setText("Coin not Available! Please check the coin name or symbol");
             }
